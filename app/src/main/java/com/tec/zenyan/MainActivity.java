@@ -10,7 +10,11 @@ import android.view.View;
 import com.tec.zenyan.activity.DownLoadUtils;
 import com.tec.zenyan.activity.DownloadApk;
 import com.tec.zenyan.common.Link;
+import com.tec.zenyan.module.DateJsonParse;
 import com.tec.zenyan.module.OKhttpMethod;
+import com.tec.zenyan.module.UpdateInfo;
+
+import org.json.JSONException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -18,10 +22,20 @@ public class MainActivity extends AppCompatActivity {
     private OKhttpMethod mOKhttpMethod;
     private Link mLink;
     private String result;
+    private UpdateInfo mUpdateInfo;
+    private DateJsonParse mDateJsonParse;
+    private int version;
+    private String Updates;
+    private String Url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mDateJsonParse = new DateJsonParse();
+        mOKhttpMethod = new OKhttpMethod();
+        mLink = new Link();
+        mUpdateInfo = new UpdateInfo();
+        mOKhttpMethod.get(mLink.Constent_url);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -30,14 +44,25 @@ public class MainActivity extends AppCompatActivity {
         DownloadApk.registerBroadcast(this);
         //2.删除已存在的Apk
         DownloadApk.removeFile(this);
+
         fab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
-
-                result = mOKhttpMethod.get(mLink.Constent_url);
+                do{
+                    result = mOKhttpMethod.getUpdataData();
+                } while (result==null);
+                try {
+                    mUpdateInfo.setVersion(mDateJsonParse.getIntDate(result,"version"));
+                    mUpdateInfo.setUpdates(mDateJsonParse.getStringDate(result,"updates"));
+                    mUpdateInfo.setUrl(mDateJsonParse.getStringDate(result,"url"));
+                    version = mUpdateInfo.getVersion();
+                    Updates = mUpdateInfo.getUpdates();
+                    Url = mUpdateInfo.getUrl();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Log.i("Main","result"+result);
-
 
                 //3.如果手机已经启动下载程序，执行downloadApk。否则跳转到设置界面
 //                if (DownLoadUtils.getInstance(getApplicationContext()).canDownload()) {

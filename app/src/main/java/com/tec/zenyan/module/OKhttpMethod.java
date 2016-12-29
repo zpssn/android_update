@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.tec.zenyan.MyApplication;
 import com.tec.zenyan.common.Link;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.FileCallBack;
@@ -23,6 +24,15 @@ import okhttp3.Request;
 
 public class OKhttpMethod {
     public Context mContext;
+    private String UpdataData;
+
+    public String getUpdataData() {
+        return UpdataData;
+    }
+
+    public void setUpdataData(String data) {
+        this.UpdataData = data;
+    }
 
     public void post(String url){
         OkHttpUtils
@@ -45,8 +55,8 @@ public class OKhttpMethod {
                     }
                 });
     }
-    public String get(String url){
-        final String[] result = new String[1];
+    public void get(String url){
+
         OkHttpUtils
                 .get()
                 .url(url)
@@ -60,10 +70,9 @@ public class OKhttpMethod {
 
                     @Override
                     public void onResponse(String response, int id) {
-                        result[0] = response;
+                        setUpdataData(response);
                     }
                 });
-        return result[0];
     }
 
     public int download_apk(String url){
