@@ -1,5 +1,6 @@
 package com.tec.zenyan;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.view.View;
 
 import com.tec.zenyan.activity.DownLoadUtils;
 import com.tec.zenyan.activity.DownloadApk;
+import com.tec.zenyan.activity.ShowAppMessageActivity;
+import com.tec.zenyan.common.AppMessage;
 import com.tec.zenyan.common.Link;
 import com.tec.zenyan.module.DateJsonParse;
 import com.tec.zenyan.module.OKhttpMethod;
@@ -24,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private String result;
     private UpdateInfo mUpdateInfo;
     private DateJsonParse mDateJsonParse;
-    private int version;
+    private int new_version;
+    private int now_version;
     private String Updates;
     private String Url;
 
@@ -49,20 +53,24 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view) {
-                do{
-                    result = mOKhttpMethod.getUpdataData();
-                } while (result==null);
-                try {
-                    mUpdateInfo.setVersion(mDateJsonParse.getIntDate(result,"version"));
-                    mUpdateInfo.setUpdates(mDateJsonParse.getStringDate(result,"updates"));
-                    mUpdateInfo.setUrl(mDateJsonParse.getStringDate(result,"url"));
-                    version = mUpdateInfo.getVersion();
-                    Updates = mUpdateInfo.getUpdates();
-                    Url = mUpdateInfo.getUrl();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                Log.i("Main","result"+result);
+//                do{
+//                    result = mOKhttpMethod.getUpdataData();
+//                } while (result==null);
+//                try {
+//                    mUpdateInfo.setVersion(mDateJsonParse.getIntDate(result,"version"));
+//                    mUpdateInfo.setUpdates(mDateJsonParse.getStringDate(result,"updates"));
+//                    mUpdateInfo.setUrl(mDateJsonParse.getStringDate(result,"url"));
+//                    new_version = mUpdateInfo.getVersion();
+//                    Updates = mUpdateInfo.getUpdates();
+//                    Url = mUpdateInfo.getUrl();
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, ShowAppMessageActivity.class);
+                startActivity(intent);
+                now_version=AppMessage.getVersionCode(MainActivity.this);
+                Log.i("Main","result"+now_version);
 
                 //3.如果手机已经启动下载程序，执行downloadApk。否则跳转到设置界面
 //                if (DownLoadUtils.getInstance(getApplicationContext()).canDownload()) {

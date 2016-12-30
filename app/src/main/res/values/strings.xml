@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">OKhttp</string>
     <string name="action_settings">Settings</string>
+    <string name="more_about">关于HONYAR</string>
+    <string name="about_com">服务电话：4008267818 \n\n  杭州鸿雁智能科技有限公司 \n\n http://www.honyar.com.cn \n\n 地址：浙江省杭州市余杭区五常大道138号</string>
 </resources>

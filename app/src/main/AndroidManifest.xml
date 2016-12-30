@@ -25,6 +25,7 @@
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
         </receiver>
+        <activity android:name=".activity.ShowAppMessageActivity"/>
     </application>
 
 </manifest>
