@@ -1,6 +1,7 @@
 package com.tec.zenyan.module;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
@@ -9,6 +10,7 @@ import com.google.gson.Gson;
 import com.tec.zenyan.MyApplication;
 import com.tec.zenyan.common.Link;
 import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.BitmapCallback;
 import com.zhy.http.okhttp.callback.FileCallBack;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -25,6 +27,15 @@ import okhttp3.Request;
 public class OKhttpMethod {
     public Context mContext;
     private String UpdataData;
+    private Bitmap welcomebitmap;
+
+    public Bitmap getwelcomeBitmap(){
+        return welcomebitmap;
+    }
+
+    public  void setBitmap(Bitmap welcomeimg){
+        this.welcomebitmap =  welcomeimg;
+    }
 
     public String getUpdataData() {
         return UpdataData;
@@ -75,6 +86,27 @@ public class OKhttpMethod {
                 });
     }
 
+
+    public void getImgBitmap(String url){
+        OkHttpUtils
+                .get()//
+                .url(url)//
+                .build()//
+                .execute(new BitmapCallback()
+                {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Log.e("onError:", "onError:"+ e.getMessage());
+                    }
+
+                    @Override
+                    public void onResponse(Bitmap response, int id) {
+//                        mImageView.setImageBitmap(response);
+                        setBitmap(response);
+                    }
+
+                });
+    }
     public int download_apk(String url){
         int progresss = 0;
         OkHttpUtils//
