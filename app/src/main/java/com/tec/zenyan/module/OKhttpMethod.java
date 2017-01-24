@@ -25,6 +25,7 @@ import okhttp3.Request;
  */
 
 public class OKhttpMethod {
+    private String TAG = "OKhttp";
     public Context mContext;
     private String UpdataData;
     private Bitmap welcomebitmap;
@@ -81,6 +82,7 @@ public class OKhttpMethod {
 
                     @Override
                     public void onResponse(String response, int id) {
+                        Log.i(TAG,"RESULT"+response);
                         setUpdataData(response);
                     }
                 });
