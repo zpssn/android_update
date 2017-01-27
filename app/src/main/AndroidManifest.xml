@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:theme="@style/AppTheme.NoActionBar"
-            android:name=".MainActivity">
+            android:name=".activity.WelcomeActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +26,7 @@
             </intent-filter>
         </receiver>
         <activity android:name=".activity.ShowAppMessageActivity"/>
+        <activity android:name=".MainActivity"/>
     </application>
 
 </manifest>

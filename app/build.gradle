@@ -29,5 +29,5 @@ dependencies {
     compile 'com.zhy:okhttputils:2.6.2'
     compile 'com.google.code.gson:gson:2.0'
     testCompile 'junit:junit:4.12'
-    compile files('E:/android_update/libs/jsms_android-1.1.0.jar')
+    compile 'com.facebook.stetho:stetho:1.1.0'
 }

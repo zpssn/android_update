@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String CREATE_welcom_image = "create table welcom_image ("
-            + "id integer primary key autoincrement, "
+            + "version text, "
             + "image BLOB)";
     private Context mContext;
     public DatabaseHelper(Context context, String name, SQLiteDatabase.CursorFactory

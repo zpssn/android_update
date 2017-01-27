@@ -2,6 +2,7 @@ package com.tec.zenyan;
 
 import android.app.Application;
 
+import com.facebook.stetho.Stetho;
 import com.tec.zenyan.module.SystemParams;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.cookie.CookieJarImpl;
@@ -32,5 +33,10 @@ public class MyApplication extends Application {
 
         OkHttpUtils.initClient(okHttpClient);
 
+        Stetho.initialize(Stetho
+                .newInitializerBuilder(this)
+                .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
+                .enableWebKitInspector(
+                        Stetho.defaultInspectorModulesProvider(this)).build());
     }
 }

@@ -5,6 +5,6 @@ package com.tec.zenyan.common;
  */
 
 public class Link {
-    public String Constent_url = "http://192.168.0.109:2000/okhttpserver";
-    public String getBitmap_url = "http://192.168.0.109:2000/getbitmap";
+    public String Constent_url = "http://192.168.1.103:2000/okhttpserver";
+    public String getBitmap_url = "http://192.168.1.103:2000/getbitmap";
 }

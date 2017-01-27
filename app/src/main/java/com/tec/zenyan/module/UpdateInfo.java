@@ -12,6 +12,8 @@ public class UpdateInfo {
 
     private String url;
 
+    private String imageversion;
+
     public String getUrl() {
         return url;
     }
@@ -26,6 +28,12 @@ public class UpdateInfo {
 
     public void setVersion(int version) {
         this.version = version;
+    }
+    public String getWelcome_ImageVersion(){
+        return imageversion;
+    }
+    public void setWelcome_ImageVersion(String version){
+        this.imageversion = version;
     }
 
     public String getUpdates() {
